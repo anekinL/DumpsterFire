@@ -2,7 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import ControlPanel from "./ControlPanel/ControlPanel.jsx"
+import ControlPanel from "./components/ControlPanel/ControlPanel.jsx"
 
 function App() {
   const [count, setCount] = useState(0)
