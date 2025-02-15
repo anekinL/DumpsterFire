@@ -1,0 +1,14 @@
+/* src/components/Square/Square.css */
+.square {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  .square.hovered {
+    background-color: #ddd;
+  }

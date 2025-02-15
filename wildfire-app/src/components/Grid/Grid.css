@@ -1,0 +1,7 @@
+/* src/components/Grid/Grid.css */
+.grid {
+    display: grid;
+    gap: 1px;
+    width: fit-content;
+    border: 0px;
+  }
