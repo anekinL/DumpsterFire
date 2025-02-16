@@ -10,7 +10,7 @@ const Grid = ({ rows, columns }) => {
     for (let i = 0; i < rows * columns; i++) {
       initialData.push({
         id: i + 1,
-        info: `This is Info for ${i + 1}\nThis is a new line`,
+        info: `id: ${i + 1} \n Longitude: ____ \n Latitude: ____ \n Humidity: ____ \n Wind: ____ \n Temperature: ____ \n Risk Factor: ____`,
         onFire: i === 0, // Set the first square on fire
         checked: false,
       });
