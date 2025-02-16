@@ -5,78 +5,61 @@ import './Grid.css';
 
 const Grid = ({ rows, columns }) => {
   // Generate grid data dynamically
-  const gridData = [];
-  for (let i = 0; i <= rows * columns; i++) {
-        if (i == 1) {
-            gridData.push({
-                id: i+1,
-                info: `This is Info for ${i+1} \nThis is a new line`,
-                onFire: true,
-                checked: false,
-            });
-        } else {
-            gridData.push({
-            id: i+1,
-            info: `This is Info for ${i+1} \nThis is a new line`,
-            onFire: false,
-            checked: false,
-            });
-        }
-  }
+  const [gridData, setGridData] = useState(() => {
+    const initialData = [];
+    for (let i = 0; i < rows * columns; i++) {
+      initialData.push({
+        id: i + 1,
+        info: `This is Info for ${i + 1}\nThis is a new line`,
+        onFire: i === 0, // Set the first square on fire
+        checked: false,
+      });
+    }
+    return initialData;
+  });
 
   useEffect(() => {
-      const interval = setInterval(() => {
-        //console.log("interval");
-        for (let i = 0; i<rows*columns; i++) {
-            if (gridData[i].onFire && !gridData[i].checked) {
-                gridData[i].checked = true;
-                console.log(i+1);
-                if (i+1%rows != 0) {
-                    const spread1 = Math.random();
-                    //console.log(spread1);
-                    if (spread1 > 0.5 && !gridData[i+1].onFire) {
-                        gridData[i+1].onFire = true;
-                    }
-                }
-                if (i%rows != 0) {
-                    const spread2 = Math.random();
-                    if (spread2 > 0.5 && !gridData[i-1].onFire) {
-                        gridData[i-1].onFire = true;
-                    }
-                }
-                
-                const spread3 = Math.random();
-                const spread4 = Math.random();
-                if (spread3 > 0.5 && i < 56) {
-                    if (!gridData[i+rows].onFire) {
-                        gridData[i+rows].onFire = true;
-                    }
-                }
-                console.log("i-rows = " + i-rows);
-                if (spread4 > 0.5 && i > 8) {
-                    if (!gridData[i-rows].onFire) {
-                        //console.log("in");
-                        gridData[i-rows].onFire = true;
-                    }
-                }
-            }
+    const interval = setInterval(() => {
+      setGridData((prevData) => {
+        const newData = [...prevData];
+        for (let i = 0; i < newData.length; i++) {
+          if (newData[i].onFire && !newData[i].checked) {
+            newData[i].checked = true;
+
+            // Spread fire to adjacent squares
+            const spreadFire = (index) => {
+              if (index >= 0 && index < newData.length && !newData[index].onFire) {
+                newData[index].onFire = Math.random() > 0.35;
+              }
+            };
+
+            // Right
+            if ((i + 1) % columns !== 0) spreadFire(i + 1);
+            // Left
+            if (i % columns !== 0) spreadFire(i - 1);
+            // Down
+            spreadFire(i + columns);
+            // Up
+            spreadFire(i - columns);
+          }
         }
-    }, 1000); 
-    
-        return () => clearInterval(interval);
-    }, []);
+        return newData;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [columns]);
 
   return (
     <div
       className="grid"
       style={{
-        gridTemplateColumns: `repeat(${columns}, 100px)`, // Set columns dynamically
-        gridTemplateRows: `repeat(${rows}, 100px)`,       // Set rows dynamically
+        gridTemplateColumns: `repeat(${columns}, 100px)`,
+        gridTemplateRows: `repeat(${rows}, 100px)`,
       }}
     >
       {gridData.map((square) => (
-        <Square key={square.id} id={square.id} sid={square.id} info={square.info} onFire={square.onFire}/>
-        
+        <Square key={square.id} {...square} />
       ))}
     </div>
   );
