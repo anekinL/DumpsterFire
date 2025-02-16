@@ -6,7 +6,7 @@ import './Grid.css';
 const Grid = ({ rows, columns }) => {
   // Generate grid data dynamically
   const gridData = [];
-  for (let i = 0; i <= rows * columns; i++) {
+  for (let i = 0; i < rows * columns; i++) {
         if (i == 1) {
             gridData.push({
                 id: i+1,
