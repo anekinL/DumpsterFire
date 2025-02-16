@@ -4,21 +4,13 @@ import CsvParser from './components/CsvParser/CsvParser'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [filteredData, setFilteredData] = useState([]);
   return (
     <>
-    <h1>Hello</h1>
-<<<<<<< Updated upstream
+    <h1>Wildfire Simulation</h1>
       <div className = "app_container">
+        <CsvParser onDataUpdate={setFilteredData} />
         <Grid rows={8} columns={8}/>
-=======
-      <div classnam = "App_container">
-        <Grid rows={8} columns={8}/>
-      </div>
-      <div>
-        <CsvParser/>
->>>>>>> Stashed changes
       </div>
     </>
   )
