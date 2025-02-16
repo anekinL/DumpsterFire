@@ -8,6 +8,7 @@ function App() {
   return (
     <>
     <h1>Hello</h1>
+<<<<<<< Updated upstream
       <div className = "app_container">
         <Grid rows={8} columns={8}/>
       </div>
