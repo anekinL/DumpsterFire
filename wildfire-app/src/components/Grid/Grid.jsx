@@ -18,11 +18,11 @@ const Grid = ({ rows, columns, filteredData }) => {
 
         return {
           id: i + 1,
-          info: `id: ${i + 1} \n 
-                 Humidity: ${data.Humidity || '_'} \n
-                 WindSpeed: ${data.Wind_Speed || '_'} \n
-                 Temperature: ${data.Temperature || '_'} \n
-                 Risk Factor: ${fireRisk.toFixed(2)}`,
+          info: `id: ${i + 1} \n\
+Humidity: ${data.Humidity || '_'} \n\n\
+WindSpeed: ${data.Wind_Speed || '_'} \n\n\
+Temperature: ${data.Temperature || '_'} \n\n\
+Risk Factor: ${fireRisk.toFixed(2)}`,
           onFire: i === 27,
           checked: false,
           fireRisk: fireRisk,
