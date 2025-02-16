@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Square.css';
 
 const Square = ({ sid, info, onFire, checked}) => {
+  const squareClass = onFire ? 'square on-fire' : 'square';
   const [isHovered, setIsHovered] = useState(false);
   const [isOnFire, setOnFire] = useState(false);
 
@@ -15,18 +16,16 @@ const Square = ({ sid, info, onFire, checked}) => {
 
 //checks the fire var every second
   useEffect(() => {
-    const element = document.getElementById(sid);
     const interval = setInterval(() => {
     
         if (onFire) {
-            console.log(element);
             setOnFire(true);
             //element.style.backgroundColor = "red";
         }; // Toggle fire state every second
       }, 1000);
   
       return () => clearInterval(interval);
-  }, []);
+  }, [onFire]);
 
 
   let className = 'square';
@@ -50,7 +49,7 @@ return (
         onMouseLeave={handleMouseLeave}
     >
 
-        <div className={`square ${isOnFire ? 'on-fire' : 'normal'}` }>
+        <div className={squareClass}>
             {sid}
         </div>
     
