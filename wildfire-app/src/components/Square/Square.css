@@ -1,4 +1,9 @@
 /* src/components/Square/Square.css */
+.square-container {
+    position: relative;
+    display: inline-block;
+}
+  
 .square {
     width: 100px;
     height: 100px;
@@ -6,9 +11,54 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background-color 0.3s ease;
-  }
-  
-  .square.hovered {
-    background-color: #ddd;
-  }
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.square:hover {
+    background-color: #f0f0f0;
+}
+
+.square-tooltip {
+    position: absolute;
+    bottom: 110%; /* Position above the square */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.tooltip-content {
+    background-color: #333;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    white-space: pre-wrap; /* This preserves newlines */
+    min-width: 150px; /* Add minimum width to prevent single-word lines */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    position: relative;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    max-width: 250px; /* Optional max width */
+    text-align: left; /* Better for multi-line text */
+}
+
+/* Tooltip arrow */
+.tooltip-content::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+}
+
+.on-fire {
+    background-color: #ff0000;
+}
+
+.normal {
+    background-color: #fff;
+}

@@ -8,8 +8,8 @@ function App() {
   return (
     <>
     <h1>Hello</h1>
-      <div classnam = "App_container">
-        <Grid rows={10} columns={10}/>
+      <div className = "app_container">
+        <Grid rows={8} columns={8}/>
       </div>
     </>
   )

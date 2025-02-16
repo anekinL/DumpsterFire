@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Square.css';
 
-const Square = ({ id, info }) => {
+const Square = ({ sid, info, onFire, checked}) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [isOnFire, setOnFire] = useState(false);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -12,29 +13,56 @@ const Square = ({ id, info }) => {
     setIsHovered(false);
   };
 
-  // Dynamic class name using if-else
+//checks the fire var every second
+  useEffect(() => {
+    const element = document.getElementById(sid);
+    const interval = setInterval(() => {
+    
+        if (onFire) {
+            console.log(element);
+            setOnFire(true);
+            //element.style.backgroundColor = "red";
+        }; // Toggle fire state every second
+      }, 1000);
+  
+      return () => clearInterval(interval);
+  }, []);
+
+
   let className = 'square';
   if (isHovered) {
     className += ' hovered';
   }
 
-  // Conditional content using if-else
+
   let content;
   if (isHovered) {
     content = info;
   } else {
-    content = id;
+    content = "";
   }
 
-  return (
-    <div
-      className={className} // Use the dynamically generated class name
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+
+return (
+    <div 
+        className="square-container"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
     >
-      {content} {/* Use the dynamically generated content */}
+
+        <div className={`square ${isOnFire ? 'on-fire' : 'normal'}` }>
+            {sid}
+        </div>
+    
+        {isHovered && (
+            <div className="square-tooltip">
+                <div className="tooltip-content">
+                    {content}
+                </div>
+            </div>
+        )}
     </div>
-  );
+    );
 };
 
 export default Square;
