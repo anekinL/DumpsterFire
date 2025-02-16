@@ -19,6 +19,7 @@ const Grid = ({ rows, columns }) => {
   });
 
   useEffect(() => {
+    const spreadDelay = Math.random() * 1000 + 1000; // Random delay between 1s and 3s
     const interval = setInterval(() => {
       setGridData((prevData) => {
         const newData = [...prevData];
@@ -29,18 +30,18 @@ const Grid = ({ rows, columns }) => {
             // Spread fire to adjacent squares
             const spreadFire = (index) => {
               if (index >= 0 && index < newData.length && !newData[index].onFire) {
-                newData[index].onFire = Math.random() > 0.35;
+                newData[index].onFire = Math.random() > 0.45;
               }
             };
 
             // Right
-            if ((i + 1) % columns !== 0) spreadFire(i + 1);
+            if ((i + 1) % columns !== 0) setTimeout(() => {spreadFire(i + 1);}, spreadDelay);
             // Left
-            if (i % columns !== 0) spreadFire(i - 1);
+            if (i % columns !== 0) setTimeout(() => {spreadFire(i - 1);}, spreadDelay);
             // Down
-            spreadFire(i + columns);
+            setTimeout(() => {spreadFire(i + columns);}, spreadDelay);
             // Up
-            spreadFire(i - columns);
+            setTimeout(() => {spreadFire(i - columns);}, spreadDelay);
           }
         }
         return newData;
