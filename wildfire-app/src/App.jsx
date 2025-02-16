@@ -1,17 +1,23 @@
 import { useState } from 'react'
 import Grid from './components/Grid/Grid'
-import CsvParser from './components/CsvParser/CsvParser'
 import './App.css'
+import ControlPanel from "./components/ControlPanel/ControlPanel.jsx"
+import background from './assets/A_img.png'
 
 function App() {
-  const [filteredData, setFilteredData] = useState([]);
+  const [count, setCount] = useState(0)
+
   return (
     <>
-    <h1>Wildfire Simulation</h1>
+    {/* added background image but looks ugly and unformatted af. */}
+    {/*<div className="background" style={{backgroundImage: `url(${background})`, backgroundSize: 'cover'}}>*/}
+      <h1>🔥🔥Super Scary Wildfire Simulator🔥🔥</h1>
       <div className = "app_container">
-        <CsvParser onDataUpdate={setFilteredData} />
         <Grid rows={8} columns={8}/>
       </div>
+        {/* added control panel */}
+      <ControlPanel /> 
+    {/*</div>*/}
     </>
   )
 }
