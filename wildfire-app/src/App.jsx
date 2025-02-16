@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Grid from './components/Grid/Grid'
+import CsvParser from './components/CsvParser/CsvParser'
 import './App.css'
 
 function App() {
@@ -11,6 +12,13 @@ function App() {
 <<<<<<< Updated upstream
       <div className = "app_container">
         <Grid rows={8} columns={8}/>
+=======
+      <div classnam = "App_container">
+        <Grid rows={8} columns={8}/>
+      </div>
+      <div>
+        <CsvParser/>
+>>>>>>> Stashed changes
       </div>
     </>
   )
